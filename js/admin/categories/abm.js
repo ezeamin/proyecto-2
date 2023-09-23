@@ -3,6 +3,7 @@ import {
   setFirstLetterToUpperCase,
 } from '../../utilities.js';
 import { Category } from './Category.js';
+import { loadCategoriesList } from './utilities.js';
 
 export const createCategory = (name) => {
   // 1. Obtener categorias de LS
@@ -58,4 +59,39 @@ export const editCategory = (name) => {
   sessionStorage.removeItem('categoryId');
 };
 
-export const deleteCategory = (categoryId) => {};
+export const deleteCategory = (categoryId) => {
+  // 1. Confirmar eliminacion
+  swal
+    .fire({
+      title: '¿Estas seguro?',
+      text: 'Esta opcion no será reversible',
+      icon: 'warning',
+      showCancelButton: true,
+      cancelButtonText: 'Cancelar',
+      confirmButtonText: 'Si, eliminar',
+    })
+    .then((action) => {
+      if (action.isConfirmed) {
+        // 2. Traer lista
+        const categories = getCategoriesFromLS();
+
+        // 3. Filtrar lista (tambien se puede con splice)
+        const filteredList = categories.filter(
+          (item) => item.id !== categoryId
+        );
+
+        // 4. Actualizamos la lista en LS
+        localStorage.setItem('categories', JSON.stringify(filteredList));
+
+        // 5. Mensaje de exito
+        swal.fire({
+          title: 'Exito',
+          text: 'La categoría se eliminó correctamente',
+          icon: 'success',
+        });
+
+        // 6. Recargar datos en tabla
+        loadCategoriesList();
+      }
+    });
+};
