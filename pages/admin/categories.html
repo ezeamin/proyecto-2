@@ -22,7 +22,11 @@
       crossorigin="anonymous"
     ></script>
     <script defer src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script defer src="https://kit.fontawesome.com/10942c11e8.js" crossorigin="anonymous"></script>
+    <script
+      defer
+      src="https://kit.fontawesome.com/10942c11e8.js"
+      crossorigin="anonymous"
+    ></script>
     <link rel="stylesheet" href="../../styles/index.css" />
     <title>Netflix</title>
   </head>
@@ -72,8 +76,16 @@
       </article>
       <article id="alert-editing" class="d-none text-warning mb-1">
         <i class="fa-solid fa-triangle-exclamation"></i>
-        <p class="d-inline">Estás editando la categoria <span id="category-being-edited" class="fw-bold"></span>.</p>
-        <button class="unset text-light text-decoration-underline" id="cancel-edition-button">Cancelar edicion</button>
+        <p class="d-inline">
+          Estás editando la categoria
+          <span id="category-being-edited" class="fw-bold"></span>.
+        </p>
+        <button
+          class="unset text-light text-decoration-underline"
+          id="cancel-edition-button"
+        >
+          Cancelar edicion
+        </button>
       </article>
       <form id="form-categories" class="d-flex gap-2">
         <fieldset class="form-floating w-100">
@@ -282,5 +294,6 @@
       <p class="mb-0 text-secondary mt-2">&copy; 1997-2023 Netflix, Inc.</p>
     </footer>
     <script type="module" src="../../js/admin/categories/app.js"></script>
+    <script type="module" src="../../js/admin/logout.js"></script>
   </body>
 </html>
