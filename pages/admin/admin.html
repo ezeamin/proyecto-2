@@ -28,6 +28,7 @@
       crossorigin="anonymous"
     ></script>
     <link rel="stylesheet" href="../../styles/index.css" />
+    <link rel="stylesheet" href="../../styles/admin.css" />
     <title>Netflix</title>
   </head>
   <body class="bg-dark">
@@ -174,20 +175,40 @@
             ></textarea>
             <label for="description-input">Descripción</label>
             <div class="invalid-feedback">
-              <p class="mb-0 text-warning">Ingresa una descripcion de entre 2 y 600 caracteres</p>
+              <p class="mb-0 text-warning">
+                Ingresa una descripcion de entre 2 y 600 caracteres
+              </p>
             </div>
           </fieldset>
         </div>
         <fieldset class="mt-3">
-            <input type="checkbox" id="is-published-input" checked />
-            <label for="published-input" class="ms-1">Está publicado</label>
+          <input type="checkbox" id="is-published-input" />
+          <label for="is-published-input" class="ms-1">Está publicado</label>
         </fieldset>
         <div class="px-3">
-            <button type="submit" class="w-100 btn btn-light mt-3">Guardar</button>
+          <button type="submit" class="w-100 btn btn-light mt-3">
+            Guardar
+          </button>
         </div>
       </form>
-      <section class="film-section"></section>
-      <section class="series-section"></section>
+      <section class="table-responsive my-4">
+        <h6 class="text-center" id="no-data-title">No hay datos :D</h6>
+        <table id="content-table" class="table d-none">
+          <thead>
+            <tr>
+              <th>Carátula</th>
+              <th>Nombre</th>
+              <th>Tipo</th>
+              <th>Categoría</th>
+              <th>Trailer</th>
+              <th>Descripción</th>
+              <th>Publicada</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
     </main>
     <footer class="container-xl">
       <div class="d-flex">

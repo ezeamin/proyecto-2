@@ -101,7 +101,7 @@ formContent.addEventListener('submit', (e) => {
   const cover = coverInput.value;
   const trailer = trailerInput.value;
   const description = descriptionInput.value;
-  const isPublished = isPublishedInput.value;
+  const isPublished = isPublishedInput.checked;
 
   // Repetimos validacion por si no se produjo el blur
   if (
@@ -135,8 +135,6 @@ formContent.addEventListener('submit', (e) => {
         isPublished
       );
     }
-
-    console.log(name, type, category, cover, trailer, description, isPublished);
 
     // Recargar tabla
     loadContentTable();

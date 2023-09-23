@@ -9,6 +9,6 @@ export class Content {
     this.cover = cover;
     this.trailer = trailer;
     this.description = description;
-    this.isPublished = isPublished === 'on';
+    this.isPublished = isPublished;
   }
 }
