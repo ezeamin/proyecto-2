@@ -23,3 +23,5 @@ export const createCategory = (name) => {
 };
 
 export const editCategory = (name) => {};
+
+export const deleteCategory = (categoryId) => {};

@@ -1,6 +1,7 @@
 import { getCategoriesFromLS } from '../../utilities.js';
 import { validateName } from '../../validators.js';
 import { createCategory, editCategory } from './abm.js';
+import { loadCategoriesList } from './utilities.js';
 
 // -----------------------------------------
 // 1. Proteger ruta
@@ -13,7 +14,13 @@ if (!isLogged) {
 }
 
 // -----------------------------------------
-// 2. Seleccionar elementos del DOM
+// 2. Cargar listado de categorias
+// -----------------------------------------
+
+loadCategoriesList();
+
+// -----------------------------------------
+// 3. Seleccionar elementos del DOM
 // -----------------------------------------
 
 const formCategories = document.getElementById('form-categories');
@@ -21,7 +28,7 @@ const categoriesInput = document.getElementById('category-input');
 const credentialsAlert = document.getElementById('alert-categories');
 
 // -----------------------------------------
-// 3. Manejar el submit
+// 4. Manejar el submit
 // -----------------------------------------
 
 formCategories.addEventListener('submit', (e) => {
@@ -56,7 +63,7 @@ formCategories.addEventListener('submit', (e) => {
     credentialsAlert.classList.add('d-none');
 
     // 2. Crear categoria (como obj)
-    const isEditing = JSON.parse(sessionStorage.getItem('isEditingCategory'));
+    const isEditing = JSON.parse(sessionStorage.getItem('categoryId'));
     if (isEditing) {
       editCategory(category);
     } else {
@@ -68,5 +75,8 @@ formCategories.addEventListener('submit', (e) => {
 
     // 4. Limpiar clases
     categoriesInput.classList.remove('is-valid');
+
+    // 5. Recargar listado
+    loadCategoriesList();
   }
 });

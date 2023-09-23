@@ -22,6 +22,7 @@
       crossorigin="anonymous"
     ></script>
     <script defer src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script defer src="https://kit.fontawesome.com/10942c11e8.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../../styles/index.css" />
     <title>Netflix</title>
   </head>
@@ -68,6 +69,11 @@
       <hr />
       <article id="alert-categories" class="d-none alert alert-warning mb-3">
         <p class="mb-0 text-light d-inline fw-bold">Categoria ya existente</p>
+      </article>
+      <article id="alert-editing" class="d-none text-warning mb-1">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        <p class="d-inline">Estás editando la categoria <span id="category-being-edited" class="fw-bold"></span>.</p>
+        <button class="unset text-light text-decoration-underline" id="cancel-edition-button">Cancelar edicion</button>
       </article>
       <form id="form-categories" class="d-flex gap-2">
         <fieldset class="form-floating w-100">
