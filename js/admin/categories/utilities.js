@@ -8,6 +8,7 @@ const prepareEdition = (name, id) => {
   const cancelButton = document.getElementById('cancel-edition-button');
 
   categoryInput.value = name;
+  categoryInput.focus();
 
   sessionStorage.setItem('categoryId', id);
 
@@ -18,7 +19,7 @@ const prepareEdition = (name, id) => {
     sessionStorage.removeItem('categoryId');
     editingWarning.classList.add('d-none');
     categoryInput.value = '';
-  }
+  };
 };
 
 export const createCategoryCard = (category) => {
@@ -34,7 +35,7 @@ export const createCategoryCard = (category) => {
   cardBody.classList.add('card-body');
 
   const cardFooter = document.createElement('div');
-  cardFooter.classList.add('card-footer','justify-content-end', 'd-flex');
+  cardFooter.classList.add('card-footer', 'justify-content-end', 'd-flex');
 
   const h3 = document.createElement('h3');
   h3.innerText = category.name;
@@ -63,7 +64,11 @@ export const loadCategoriesList = () => {
   // 1. Obtener categorias de LS
   const categories = getCategoriesFromLS();
 
-  // 2. Generar HTML
+  // 2. Limpiar lista de categorias
+  const sectionCategories = document.getElementById('categories-list-section');
+  sectionCategories.innerHTML = '';
+
+  // 3. Generar HTML
   categories.forEach((category) => {
     createCategoryCard(category);
   });

@@ -63,7 +63,7 @@ formCategories.addEventListener('submit', (e) => {
     credentialsAlert.classList.add('d-none');
 
     // 2. Crear categoria (como obj)
-    const isEditing = JSON.parse(sessionStorage.getItem('categoryId'));
+    const isEditing = sessionStorage.getItem('categoryId');
     if (isEditing) {
       editCategory(category);
     } else {
