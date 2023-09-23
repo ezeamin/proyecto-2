@@ -1,3 +1,23 @@
+body {
+  display: flex !important;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1 0 auto;
+  overflow: hidden;
+}
+
+footer {
+  flex-shrink: 0;
+  padding: 1rem 0 0.5rem 0;
+}
+
+.list-footer {
+  list-style: none;
+}
+
 .unset {
   all: unset;
 }
