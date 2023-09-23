@@ -21,12 +21,21 @@
       integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
       crossorigin="anonymous"
     ></script>
+    <script
+      defer
+      src="https://kit.fontawesome.com/10942c11e8.js"
+      crossorigin="anonymous"
+    ></script>
     <link rel="stylesheet" href="./styles/index.css" />
+    <link rel="stylesheet" href="./styles/home.css" />
     <title>Netflix</title>
   </head>
   <body class="bg-dark">
-    <header>
-      <nav class="navbar navbar-expand-md navbar-dark text-light">
+    <header class="fixed">
+      <nav
+        id="home-navbar"
+        class="navbar navbar-expand-md navbar-dark text-light"
+      >
         <div class="container-xl">
           <a class="navbar-brand" href="#">
             <img
@@ -105,7 +114,30 @@
         </div>
       </nav>
     </header>
-    <main></main>
+    <main>
+      <section id="main-content" class="position-relative">
+        <div id="iframe-container">
+          <iframe
+            id="main-content-video"
+            src="https://www.youtube.com/embed/MlDTHzK1vKI?controls=0&autoplay=1&disablekb=1&rel=0&showinfo=0&modestbranding=1&fs=0&mute=1"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          ></iframe>
+        </div>
+        <div class="container-lg" id="main-content-front-elements">
+          <h1 id="main-content-title"></h1>
+          <button class="btn btn-light px-4">
+            <i class="fa-solid fa-play"></i>
+            <p class="mb-0 d-inline ms-2">Reproducir</p>
+          </button>
+          <button class="btn btn-outline-light px-4">
+            <i class="fa-solid fa-circle-info"></i>
+            <p class="mb-0 d-inline ms-2">Más informacion</p>
+          </button>
+        </div>
+      </section>
+      <section id="content-section" class="container mt-3 mb-5"></section>
+    </main>
     <footer class="container-xl">
       <div class="d-flex">
         <a href="#" class="me-3 text-light"
@@ -290,5 +322,6 @@
       </div>
       <p class="mb-0 text-secondary mt-2">&copy; 1997-2023 Netflix, Inc.</p>
     </footer>
+    <script type="module" src="./js/app.js"></script>
   </body>
 </html>
