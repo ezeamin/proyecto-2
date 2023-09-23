@@ -13,10 +13,66 @@ export const types = [
 ];
 
 export const isEditingContent = () => {
-  return JSON.parse(sessionStorage.getItem('contentId'));
+  return !!sessionStorage.getItem('contentId');
 };
 
-const prepareContentEdition = (contentId) => {};
+const prepareContentEdition = (contentId) => {
+  const nameInput = document.getElementById('name-input');
+  const typeInput = document.getElementById('type-select');
+  const categoryInput = document.getElementById('category-select');
+  const coverInput = document.getElementById('cover-input');
+  const trailerInput = document.getElementById('trailer-input');
+  const descriptionInput = document.getElementById('description-input');
+  const isPublishedInput = document.getElementById('is-published-input');
+
+  const contentForm = document.getElementById('form-content');
+
+  const editingWarning = document.getElementById('alert-editing');
+  const editingSpan = document.getElementById('content-being-edited');
+  const typeSpan = document.getElementById('content-type-name');
+  const cancelButton = document.getElementById('cancel-edition-button');
+
+  const contentList = getContentFromLS();
+  const content = contentList.find((content) => content.id === contentId);
+
+  nameInput.value = content.name;
+  typeInput.value = content.typeId;
+  categoryInput.value = content.categoryId;
+  coverInput.value = content.cover;
+  trailerInput.value = content.trailer;
+  descriptionInput.value = content.description;
+  isPublishedInput.checked = content.isPublished;
+
+  // Pasarela de foco para mostrar correctamente los inputs de bootstrap
+  typeInput.focus();
+  categoryInput.focus();
+  coverInput.focus();
+  trailerInput.focus();
+  descriptionInput.focus();
+  nameInput.focus();
+
+  sessionStorage.setItem('contentId', contentId);
+
+  editingWarning.classList.remove('d-none');
+  typeSpan.innerText = types
+    .find((type) => type.id === content.typeId)
+    .name.toLowerCase();
+  editingSpan.innerText = content.name;
+
+  cancelButton.onclick = () => {
+    sessionStorage.removeItem('contentId');
+    editingWarning.classList.add('d-none');
+    contentForm.reset();
+
+    // Limpiar clases
+    nameInput.classList.remove('is-valid', 'is-invalid');
+    typeInput.classList.remove('is-valid', 'is-invalid');
+    categoryInput.classList.remove('is-valid', 'is-invalid');
+    coverInput.classList.remove('is-valid', 'is-invalid');
+    trailerInput.classList.remove('is-valid', 'is-invalid');
+    descriptionInput.classList.remove('is-valid', 'is-invalid');
+  };
+};
 
 export const createContentRow = (content) => {
   const contentTable = document.getElementById('content-table');

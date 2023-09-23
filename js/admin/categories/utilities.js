@@ -19,6 +19,9 @@ const prepareEdition = (name, id) => {
     sessionStorage.removeItem('categoryId');
     editingWarning.classList.add('d-none');
     categoryInput.value = '';
+
+    // Limpiar clases
+    categoryInput.classList.remove('is-valid', 'is-invalid');
   };
 };
 

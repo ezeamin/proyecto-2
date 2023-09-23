@@ -72,6 +72,19 @@
     <main class="container text-light">
       <h1>Administrar contenido</h1>
       <hr />
+      <article id="alert-editing" class="d-none text-warning mb-1">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        <p class="d-inline">
+          Estás editando la <span id="content-type-name"></span>
+          <span id="content-being-edited" class="fw-bold"></span>.
+        </p>
+        <button
+          class="unset text-light text-decoration-underline"
+          id="cancel-edition-button"
+        >
+          Cancelar edicion
+        </button>
+      </article>
       <form id="form-content" class="row">
         <div class="col-12 col-md-6 mb-2">
           <fieldset class="form-floating">

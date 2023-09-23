@@ -44,7 +44,57 @@ export const editContent = (
   trailer,
   description,
   isPublished
-) => {};
+) => {
+  // 1. Traer ID de sessionStorage
+  const contentId = sessionStorage.getItem('contentId');
+
+  // 2. Obtener categorias de LS
+  const contentList = getContentFromLS();
+
+  // 3. Buscar categoria por ID
+  const contentIndex = contentList.findIndex((item) => item.id === contentId);
+
+  // ESTO podría mejorarse, porque resetea el formulario
+  if (contentIndex === -1) {
+    swal.fire({
+      title: 'Error',
+      text: `Ocurrió un error inesperado. Contenido no encontrado`,
+      icon: 'error',
+      timer: 2000,
+      timerProgressBar: false,
+      showConfirmButton: false,
+    });
+    return;
+  }
+
+  // 4. Editar contenido
+  contentList[contentIndex].name = name.trim();
+  contentList[contentIndex].type = type;
+  contentList[contentIndex].category = category;
+  contentList[contentIndex].cover = cover;
+  contentList[contentIndex].trailer = trailer;
+  contentList[contentIndex].description = description;
+  contentList[contentIndex].isPublished = isPublished;
+
+  // 5. Guardar nuevamente en LS
+  localStorage.setItem('contents', JSON.stringify(contentList));
+
+  // 6. Mensaje de exito
+  swal.fire({
+    title: 'Contenido editado!',
+    icon: 'success',
+    timer: 1500,
+    timerProgressBar: false,
+    showConfirmButton: false,
+  });
+
+  // 7. Ocultar warning de edicion
+  const editingWarning = document.getElementById('alert-editing');
+  editingWarning.classList.add('d-none');
+
+  // 8. Limpiar id del sessionStorage
+  sessionStorage.removeItem('contentId');
+};
 
 export const deleteContent = (contentId) => {
   // 1. Confirmar eliminacion
