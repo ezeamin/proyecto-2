@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,200;9..40,500&display=swap');
+
+* {
+  font-family: 'DM Sans', Arial;
+}
+
 body {
   display: flex !important;
   flex-direction: column;
