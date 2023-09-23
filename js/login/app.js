@@ -8,7 +8,7 @@ import { validatePassword, validateEmail } from '../validators.js';
 const isLogged = JSON.parse(sessionStorage.getItem('isLogged'));
 if (isLogged) {
   // No deberia poder ver la página
-  window.location.href = './admin.html';
+  window.location.href = './admin/admin.html';
 }
 
 // -----------------------------------------
@@ -73,7 +73,7 @@ formLogin.addEventListener('submit', (e) => {
         })
         .then(() => {
           // 5. Redireccion a admin
-          window.location.href = './admin.html';
+          window.location.href = './admin/admin.html';
         });
     } else {
       // Credenciales no validas

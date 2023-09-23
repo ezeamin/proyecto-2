@@ -21,14 +21,16 @@
       integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
       crossorigin="anonymous"
     ></script>
-    <link rel="stylesheet" href="./styles/index.css" />
+    <script defer src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script defer src="https://kit.fontawesome.com/10942c11e8.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../../styles/index.css" />
     <title>Netflix</title>
   </head>
   <body class="bg-dark">
     <header>
       <nav class="navbar navbar-expand-md navbar-dark text-light">
         <div class="container-xl">
-          <a class="navbar-brand" href="#">
+          <a class="navbar-brand" href="../../index.html">
             <img
               src="https://assets.stickpng.com/images/580b57fcd9996e24bc43c529.png"
               alt="Netflix logo"
@@ -49,63 +51,52 @@
           <div class="collapse navbar-collapse" id="navbar">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
+                <a class="nav-link" href="./admin.html">Admin</a>
+              </li>
+              <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="#"
-                  >Inicio</a
+                  >Categorias</a
                 >
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="./pages/error404.html">Series</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="./pages/error404.html">Peliculas</a>
               </li>
             </ul>
-            <div class="d-flex">
-              <button type="button" class="unset px-2 text-light">
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="search-icon ltr-4z3qvp e1svuwfo1"
-                  data-name="MagnifyingGlass"
-                  aria-hidden="true"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
-                    d="M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10ZM15.6177 17.0319C14.078 18.2635 12.125 19 10 19C5.02944 19 1 14.9706 1 10C1 5.02944 5.02944 1 10 1C14.9706 1 19 5.02944 19 10C19 12.125 18.2635 14.078 17.0319 15.6177L22.7071 21.2929L21.2929 22.7071L15.6177 17.0319Z"
-                    fill="currentColor"
-                  ></path>
-                </svg>
-              </button>
-              <button type="button" class="unset px-2 me-2">
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="ltr-4z3qvp e1svuwfo1"
-                  data-name="Bell"
-                  aria-hidden="true"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
-                    d="M13.0002 4.07092C16.3924 4.55624 19 7.4736 19 11V15.2538C20.0489 15.3307 21.0851 15.4245 22.1072 15.5347L21.8928 17.5232C18.7222 17.1813 15.4092 17 12 17C8.59081 17 5.27788 17.1813 2.10723 17.5232L1.89282 15.5347C2.91498 15.4245 3.95119 15.3307 5.00003 15.2538V11C5.00003 7.47345 7.60784 4.55599 11.0002 4.07086V2H13.0002V4.07092ZM17 15.1287V11C17 8.23858 14.7614 6 12 6C9.2386 6 7.00003 8.23858 7.00003 11V15.1287C8.64066 15.0437 10.3091 15 12 15C13.691 15 15.3594 15.0437 17 15.1287ZM8.62593 19.3712C8.66235 20.5173 10.1512 22 11.9996 22C13.848 22 15.3368 20.5173 15.3732 19.3712C15.3803 19.1489 15.1758 19 14.9533 19H9.0458C8.82333 19 8.61886 19.1489 8.62593 19.3712Z"
-                    fill="currentColor"
-                  ></path>
-                </svg>
-              </button>
-              <a href="./pages/login.html" class="btn btn-danger">Ingresar</a>
-            </div>
+            <button id="logout-button" class="btn btn-danger">Salir</button>
           </div>
         </div>
       </nav>
     </header>
-    <main></main>
+    <main class="container text-light">
+      <h1>Categorias</h1>
+      <hr />
+      <article id="alert-categories" class="d-none alert alert-warning mb-3">
+        <p class="mb-0 text-light d-inline fw-bold">Categoria ya existente</p>
+      </article>
+      <article id="alert-editing" class="d-none text-warning mb-1">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        <p class="d-inline">Estás editando la categoria <span id="category-being-edited" class="fw-bold"></span>.</p>
+        <button class="unset text-light text-decoration-underline" id="cancel-edition-button">Cancelar edicion</button>
+      </article>
+      <form id="form-categories" class="d-flex gap-2">
+        <fieldset class="form-floating w-100">
+          <input
+            placeholder=""
+            type="text"
+            class="form-control"
+            id="category-input"
+            required
+            minlength="2"
+            maxlength="30"
+          />
+          <label for="email-login">Nombre de la categoria</label>
+          <div class="invalid-feedback">
+            <p class="mb-0 text-warning">
+              Ingresa un nombre de al menos 2 caracteres
+            </p>
+          </div>
+        </fieldset>
+        <button type="submit" class="btn btn-light">Guardar</button>
+      </form>
+      <section class="row mt-4" id="categories-list-section"></section>
+    </main>
     <footer class="container-xl">
       <div class="d-flex">
         <a href="#" class="me-3 text-light"
@@ -186,21 +177,21 @@
           <ul class="ps-0 list-footer">
             <li>
               <a
-                href="./pages/error404.html"
+                href="../error404.html"
                 class="text-secondary mb-2 list-none d-block text-decoration-none"
                 >Audio descriptivo</a
               >
             </li>
             <li>
               <a
-                href="./pages/error404.html"
+                href="../error404.html"
                 class="text-secondary mb-2 list-none d-block text-decoration-none"
                 >Relaciones con inversionistas</a
               >
             </li>
             <li>
               <a
-                href="./pages/error404.html"
+                href="../error404.html"
                 class="text-secondary mb-2 list-none d-block text-decoration-none"
                 >Avisos legales</a
               >
@@ -211,21 +202,21 @@
           <ul class="ps-0 list-footer">
             <li>
               <a
-                href="./pages/error404.html"
+                href="../error404.html"
                 class="text-secondary mb-2 list-none d-block text-decoration-none"
                 >Audio descriptivo</a
               >
             </li>
             <li>
               <a
-                href="./pages/error404.html"
+                href="../error404.html"
                 class="text-secondary mb-2 list-none d-block text-decoration-none"
                 >Relaciones con inversionistas</a
               >
             </li>
             <li>
               <a
-                href="./pages/error404.html"
+                href="../error404.html"
                 class="text-secondary mb-2 list-none d-block text-decoration-none"
                 >Avisos legales</a
               >
@@ -236,21 +227,21 @@
           <ul class="ps-0 list-footer">
             <li>
               <a
-                href="./pages/error404.html"
+                href="../error404.html"
                 class="text-secondary mb-2 list-none d-block text-decoration-none"
                 >Audio descriptivo</a
               >
             </li>
             <li>
               <a
-                href="./pages/error404.html"
+                href="../error404.html"
                 class="text-secondary mb-2 list-none d-block text-decoration-none"
                 >Relaciones con inversionistas</a
               >
             </li>
             <li>
               <a
-                href="./pages/error404.html"
+                href="../error404.html"
                 class="text-secondary mb-2 list-none d-block text-decoration-none"
                 >Avisos legales</a
               >
@@ -261,21 +252,21 @@
           <ul class="ps-0 list-footer">
             <li>
               <a
-                href="./pages/error404.html"
+                href="../error404.html"
                 class="text-secondary mb-2 list-none d-block text-decoration-none"
                 >Audio descriptivo</a
               >
             </li>
             <li>
               <a
-                href="./pages/error404.html"
+                href="../error404.html"
                 class="text-secondary mb-2 list-none d-block text-decoration-none"
                 >Relaciones con inversionistas</a
               >
             </li>
             <li>
               <a
-                href="./pages/error404.html"
+                href="../error404.html"
                 class="text-secondary mb-2 list-none d-block text-decoration-none"
                 >Avisos legales</a
               >
@@ -284,11 +275,12 @@
         </article>
       </section>
       <div class="mt-4">
-        <a href="./pages/error404.html" class="btn-codigo-servicio"
+        <a href="../error404.html" class="btn-codigo-servicio"
           >Codigo de servicio</a
         >
       </div>
       <p class="mb-0 text-secondary mt-2">&copy; 1997-2023 Netflix, Inc.</p>
     </footer>
+    <script type="module" src="../../js/admin/categories/app.js"></script>
   </body>
 </html>
