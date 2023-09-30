@@ -74,6 +74,28 @@ const prepareContentEdition = (contentId) => {
   };
 };
 
+const changeFeatureMovie = (contentId) => {
+  const contentList = getContentFromLS();
+  const contentIndex = contentList.findIndex(
+    (content) => content.id === contentId
+  );
+
+  if (contentList[contentIndex].isFeatured) {
+    contentList[contentIndex].isFeatured = false;
+  } else {
+    // Sacar el destacado de TODAS las peliculas/series
+    contentList.forEach((content) => {
+      content.isFeatured = false;
+    });
+
+    contentList[contentIndex].isFeatured = true;
+  }
+
+  localStorage.setItem('contents', JSON.stringify(contentList));
+
+  loadContentTable();
+};
+
 export const createContentRow = (content) => {
   const contentTable = document.getElementById('content-table');
   const contentTableBody = contentTable.querySelector('tbody');
@@ -134,14 +156,27 @@ export const createContentRow = (content) => {
   editButton.onclick = () => prepareContentEdition(content.id);
 
   const deleteButton = document.createElement('button');
-  deleteButton.classList.add('btn', 'btn-danger');
+  deleteButton.classList.add('btn', 'btn-danger', 'mb-2', 'd-block');
   const deleteIcon = document.createElement('i');
   deleteIcon.classList.add('fa-solid', 'fa-trash');
   deleteButton.appendChild(deleteIcon);
   deleteButton.onclick = () => deleteContent(content.id);
 
+  const highlightButton = document.createElement('button');
+  highlightButton.classList.add('btn', 'btn-light');
+  const highlightIcon = document.createElement('i');
+  highlightIcon.classList.add(
+    content.isFeatured ? 'fa-solid' : 'fa-regular',
+    'fa-star'
+  );
+  highlightButton.appendChild(highlightIcon);
+  highlightButton.onclick = () => {
+    changeFeatureMovie(content.id);
+  };
+
   actionsCell.appendChild(editButton);
   actionsCell.appendChild(deleteButton);
+  actionsCell.appendChild(highlightButton);
 
   contentRow.appendChild(coverCell);
   contentRow.appendChild(nameCell);
