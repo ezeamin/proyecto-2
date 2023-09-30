@@ -2,7 +2,9 @@ import {
   contentElementInteractivity,
   createCategorySection,
   getCategoriesFromLS,
+  getContentFromLS,
   loadFeatured,
+  showDefaultMessage,
 } from './utilities.js';
 
 // ------------------------------
@@ -22,7 +24,19 @@ categories.forEach((category) => {
 });
 
 // ------------------------------
-// 2. Agregar interactividad
+// 3. Deteccion de contenido
+// ------------------------------
+
+const contentList = getContentFromLS();
+const isThereNoPublishedContent = contentList.every((content) => {
+  return !content.isPublished;
+});
+if (contentList.length === 0 || isThereNoPublishedContent) {
+  showDefaultMessage();
+}
+
+// ------------------------------
+// 4. Agregar interactividad
 // ------------------------------
 
 contentElementInteractivity();

@@ -127,6 +127,8 @@ export const loadFeatured = () => {
   });
 
   if (!content) {
+    if (contentList.length === 0) return;
+
     // traer un contenido aleatorio de la lista
     const randomIndex = Math.floor(Math.random() * contentList.length);
     content = contentList[randomIndex];
@@ -139,4 +141,23 @@ export const loadFeatured = () => {
 
   mainContentVideo.src = `https://www.youtube.com/embed/${videoId}?controls=0&autoplay=1&disablekb=1&rel=0&showinfo=0&modestbranding=1&fs=0&mute=1`;
   mainContentTitle.innerText = content.name;
+};
+
+export const showDefaultMessage = () => {
+  const mainContent = document.getElementById('main-content');
+  mainContent.classList.add('d-none');
+
+  const main = document.querySelector('main');
+  main.classList.add(
+    'd-flex',
+    'flex-column',
+    'align-items-center',
+    'justify-content-center'
+  );
+
+  const message = document.createElement('h1');
+  message.innerText = 'No hay contenido disponible :(';
+  message.classList.add('text-center', 'my-5');
+
+  main.appendChild(message);
 };

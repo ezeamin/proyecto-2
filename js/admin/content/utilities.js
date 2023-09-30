@@ -74,11 +74,23 @@ const prepareContentEdition = (contentId) => {
   };
 };
 
-const changeFeatureMovie = (contentId) => {
+const changeFeaturedMovie = (contentId) => {
   const contentList = getContentFromLS();
   const contentIndex = contentList.findIndex(
     (content) => content.id === contentId
   );
+
+  if (!contentList[contentIndex].isFeatured) {
+    if (!contentList[contentIndex].isPublished) {
+      swal.fire({
+        title: 'Atención',
+        text: 'No se puede destacar un contenido no publicado',
+        icon: 'warning',
+        confirmButtonText: 'Aceptar',
+      });
+      return;
+    }
+  }
 
   if (contentList[contentIndex].isFeatured) {
     contentList[contentIndex].isFeatured = false;
@@ -171,7 +183,7 @@ export const createContentRow = (content) => {
   );
   highlightButton.appendChild(highlightIcon);
   highlightButton.onclick = () => {
-    changeFeatureMovie(content.id);
+    changeFeaturedMovie(content.id);
   };
 
   actionsCell.appendChild(editButton);
