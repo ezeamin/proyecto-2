@@ -1,5 +1,5 @@
 #main-content {
-  height: 40vh;
+  height: 50vh;
   width: 100vw;
 }
 
@@ -42,7 +42,7 @@
 
 @media (width <= 768px) {
   #main-content {
-    height: 30vh;
+    height: 40vh;
   }
 
   #main-content-front-elements {

@@ -119,3 +119,47 @@ export const contentElementInteractivity = () => {
     });
   });
 };
+
+export const loadFeatured = () => {
+  const contentList = getContentFromLS();
+  let content = contentList.find((content) => {
+    return content.isFeatured;
+  });
+
+  if (!content) {
+    if (contentList.length === 0) return;
+
+    // traer un contenido aleatorio de la lista
+    const randomIndex = Math.floor(Math.random() * contentList.length);
+    content = contentList[randomIndex];
+  }
+
+  const mainContentVideo = document.getElementById('main-content-video');
+  const mainContentTitle = document.getElementById('main-content-title');
+  const moreInfoButton = document.getElementById('more-info-button');
+
+  const videoId = new URL(content.trailer).searchParams.get('v');
+
+  mainContentVideo.src = `https://www.youtube.com/embed/${videoId}?controls=0&autoplay=1&disablekb=1&rel=0&showinfo=0&modestbranding=1&fs=0&mute=1`;
+  mainContentTitle.innerText = content.name;
+  moreInfoButton.href = `./pages/detail.html?id=${content.id}`;
+};
+
+export const showDefaultMessage = () => {
+  const mainContent = document.getElementById('main-content');
+  mainContent.classList.add('d-none');
+
+  const main = document.querySelector('main');
+  main.classList.add(
+    'd-flex',
+    'flex-column',
+    'align-items-center',
+    'justify-content-center'
+  );
+
+  const message = document.createElement('h1');
+  message.innerText = 'No hay contenido disponible :(';
+  message.classList.add('text-center', 'my-5');
+
+  main.appendChild(message);
+};
