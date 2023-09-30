@@ -1,5 +1,6 @@
 import {
   getCategoriesFromLS,
+  getContentFromLS,
   setFirstLetterToUpperCase,
 } from '../../utilities.js';
 import { Category } from './Category.js';
@@ -60,6 +61,22 @@ export const editCategory = (name) => {
 };
 
 export const deleteCategory = (categoryId) => {
+  const content = getContentFromLS();
+
+  const isThereAnyContentWithThisCategory = content.some(
+    (item) => item.categoryId === categoryId
+  );
+
+  if(isThereAnyContentWithThisCategory) {
+    swal.fire({
+      title: 'Error',
+      text: 'No se puede eliminar una categoría con contenido cargado',
+      icon: 'error',
+      confirmButtonText: 'Ok patrón',
+    });
+    return;
+  }
+
   // 1. Confirmar eliminacion
   swal
     .fire({
