@@ -136,11 +136,13 @@ export const loadFeatured = () => {
 
   const mainContentVideo = document.getElementById('main-content-video');
   const mainContentTitle = document.getElementById('main-content-title');
+  const moreInfoButton = document.getElementById('more-info-button');
 
   const videoId = new URL(content.trailer).searchParams.get('v');
 
   mainContentVideo.src = `https://www.youtube.com/embed/${videoId}?controls=0&autoplay=1&disablekb=1&rel=0&showinfo=0&modestbranding=1&fs=0&mute=1`;
   mainContentTitle.innerText = content.name;
+  moreInfoButton.href = `./pages/detail.html?id=${content.id}`;
 };
 
 export const showDefaultMessage = () => {
